@@ -13,7 +13,7 @@ Feature: Login
     Scenario: Não deve autorizar o acesso para usuários inválidos ou não cadastrados
         Given I am on the login page
         When I enter email address in "E-mail" field not registered
-        When I enter password in "Senha" field not registered
+        And I enter password in "Senha" field not registered
         And I click in Acessar button
         And I should see the mensage "Usuário ou senha inválido.Tente novamente ou verifique suas informações!"
 

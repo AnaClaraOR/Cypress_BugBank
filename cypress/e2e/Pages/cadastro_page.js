@@ -3,6 +3,8 @@
 import { faker } from '@faker-js/faker'
 
 class CadastroForm {
+    contaRecebedor = {}
+
     componentes_cadastro = {
         registroBnt: () => cy.get('.ihdmxA'),
         cadastrarBnt: () => cy.get('.card__register [type="submit"]'),
@@ -58,6 +60,20 @@ class CadastroForm {
     clickContaSaldo() {
         this.componentes_cadastro.contaSaldoBnt().click({ force: true })
     }
+
+    testeAlerta() {
+        this.componentes_cadastro.alert().invoke('text')
+            .then((text) => {
+                const match = text.match(/(\d+)-(\d+)/);
+                expect(match).to.not.be.null;
+                cy.log(match)
+                this.contaRecebedor.numeroConta = match[1];
+                this.contaRecebedor.digitoConta = match[2];
+
+                cy.log('Número da conta:', this.numeroConta);
+            })
+    }
+
 }
 
 export const cadastroForm = new CadastroForm()
@@ -67,6 +83,12 @@ export const input_registro = {
     nome: faker.person.fullName(),
     senha: faker.internet.password({ length: 5 }),
     confirmaSenhaFaker: faker.internet.password({ length: 4 })
+}
+
+export const input_registro_conta_2 = {
+    email2: faker.internet.email(),
+    nome2: faker.person.fullName(),
+    senha2: faker.internet.password({ length: 5 })
 }
 
 export const input_vazio = {

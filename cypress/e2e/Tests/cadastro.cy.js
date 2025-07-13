@@ -9,6 +9,8 @@ describe('Cadastro de usuário', () => {
     describe('Os campos Nome, Email, Senha e Confirmação de senha são de preenchimento obrigatório', () => {
         it('Given I am on the login page', () => {
             cy.visit('/')
+            cy.log("cadastroForm.numeroConta: ", cadastroForm.numeroConta)
+            cy.log("cadastroForm.digitoConta: ", cadastroForm.digitoConta)
         })
 
         it('When I click in Registrar button', () => {
@@ -275,8 +277,9 @@ describe('Cadastro de usuário', () => {
             cadastroForm.clickCadastrar()
         })
 
-        it('Then I should see the mensage "A conta XXX foi criada com sucesso"', () => {
+        it(`Then I should see the mensage "A conta XXX foi criada com sucesso"`, () => {
             cadastroForm.componentes_cadastro.alert().invoke('text').should('match', /^A conta \d+-\d+ foi criada com sucessoFechar$/)
+            //cadastroForm.testeAlerta()//.should('contains.text',`A conta ${numeroConta} foi criada com sucessoFechar`)
         })
     })
 
@@ -346,6 +349,8 @@ describe('Cadastro de usuário', () => {
     describe('Deixar inativo a opção "Criar conta com saldo" deve criar conta com saldo de R$ 0,00', () => {
         it('Given I am on the login page', () => {
             cy.visit('/')
+            cy.log("cadastroForm.numeroConta: ", cadastroForm.numeroConta)
+            cy.log("cadastroForm.digitoConta: ", cadastroForm.digitoConta)
         })
 
         it('When I click in Registrar button', () => {

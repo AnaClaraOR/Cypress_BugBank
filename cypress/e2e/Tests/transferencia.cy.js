@@ -22,7 +22,7 @@ describe('Transação', () => {
     cadastroForm.typeSenhaRegister(input_registro_conta_2.senha2)
     cadastroForm.typeConfirmaSenha(input_registro_conta_2.senha2)
     cadastroForm.clickCadastrar()
-    cadastroForm.testeAlerta()
+    cadastroForm.numeroDaConta()
     cadastroForm.clickFechar()
     loginForm.typeEmail(input_registro.email)
     loginForm.typeSenha(input_registro.senha)

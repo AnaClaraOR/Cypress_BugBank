@@ -279,7 +279,6 @@ describe('Cadastro de usuário', () => {
 
         it(`Then I should see the mensage "A conta XXX foi criada com sucesso"`, () => {
             cadastroForm.componentes_cadastro.alert().invoke('text').should('match', /^A conta \d+-\d+ foi criada com sucessoFechar$/)
-            //cadastroForm.testeAlerta()//.should('contains.text',`A conta ${numeroConta} foi criada com sucessoFechar`)
         })
     })
 

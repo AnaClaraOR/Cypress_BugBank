@@ -61,7 +61,7 @@ class CadastroForm {
         this.componentes_cadastro.contaSaldoBnt().click({ force: true })
     }
 
-    testeAlerta() {
+    numeroDaConta() {
         this.componentes_cadastro.alert().invoke('text')
             .then((text) => {
                 const match = text.match(/(\d+)-(\d+)/);

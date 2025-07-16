@@ -1,18 +1,28 @@
-# BugBank
+<img alt="BugBank - O banco com bugs e falhas do seu jeito" title="BugBank - O banco com bugs e falhas do seu jeito" src="https://raw.githubusercontent.com/jhonatasmatos/bugbank-ui/main/.github/assets/banner-bugbank.png" height="300">
 
-[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=[https://https://github.com/AnaClaraOR/Estudos_Cypress](https://github.com/AnaClaraOR/Cypress_BugBank))](https://github.com/AnaClaraOR/Cypress_BugBank)
+# 🐞 BugBank
 
-O [BugBank](https://bugbank.netlify.app/), um app para realização de transferências e pagamentos com bugs para a prática de testes com sucesso em um cenário quase real!
+**O banco com bugs e falhas do seu jeito** 
+
+O [BugBank](https://bugbank.netlify.app/), é um banco online desenvolvido para servir como ambiente de prática de *teste manual* e *automação de testes*, repleto de bugs propositalmente inseridos para enriquecer o aprendizado.
+
+----
 
 ## Introdução
-Foi utilizado o site do **BugBank** com o intuito de realizar estudos de testes automatizados utilizando os cenários quase real. 
+Foi utilizado o site do **BugBank** com o intuito de realizar estudos de testes automatizados utilizando os cenários de um banco quase real. 
 
-## Descrição do Projeto
-O BugBank é um app que realiza transferências, pagamento e extratos entre contas. Nele você pode criar contas, fazer transferências e consultar extratos. Você vai gerenciar as finanças a partir da criação de movimentações pela transferência, consultar as movimentações através do extrato. Para os módulos de pagamento e saque ainda se encontram em desenvolvimento.
+A aplicação do BugBank foi desenvolvido por [Jhonatas Matos](https://www.linkedin.com/in/jhonatas-matos/) e o código podeser conferido no seu repositório no github [BugBank repository](https://github.com/jhonatasmatos/bugbank-ui).
 
-Neste projeto será utilizado o Cypress como ferramenta de teste automatizado end-to-end projetada para a criação, execução e depuração dos testes em estudo. 
-Além disso, o JavaScript foi escolhido para ser utilizado como linguagem para o desenvolvimento do script.
-E para o planejamento dos testes foi utilizado o Gherkin.
+## Descrição do Projeto 🎯
+O BugBank é um banco que realiza cadstro, transferências, pagamentos, saques e extratos entre contas. Nele você pode criar contas, fazer transferências e consultar extratos. Você vai gerenciar as finanças a partir da criação de movimentações pela transferência e consultar as movimentações através do extrato. Para os módulos de pagamento e saque ainda se encontram em desenvolvimento.
+
+Este projeto foi cuidadosamente desenvolvido para ser um ambiente realista, porém repleto de falhas programadas, permitindo:
+- Planejamento e execução de testes manuais;
+- Criação de casos de testes em Gherkin (.feature);
+- Automação de testes com a ferramenta Cypress e desenvolvida em JavaScript;
+- Armazenamento de dados via localStorage.
+
+---
 
 ## Funcionalidade a serem testadas
 Realizei os testes das seguintes funcionalidades: 
@@ -21,9 +31,16 @@ Realizei os testes das seguintes funcionalidades:
 - Realizar Transferência de Valores
 - Consultar o Extrato
 
+## Casos de Testes 
+Os casos de testes, escritos em Gherkin, são fortemente embasados em cima dos requisitos impostos pela aplicação.
+
+- **[🐞 BugBank Features](./features)**
+
 ## Contribuinte
 Este projeto foi realizado por: 
 
 **Ana Clara Ribeiro:**
 [![Linkedin Badge Ana](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/anaclaraor/)](https://www.linkedin.com/in/anaclaraor/)
+
+[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=[https://https://github.com/AnaClaraOR/Estudos_Cypress](https://github.com/AnaClaraOR/Cypress_BugBank))](https://github.com/AnaClaraOR/Cypress_BugBank)
 

@@ -69,8 +69,6 @@ class CadastroForm {
                 cy.log(match)
                 this.contaRecebedor.numeroConta = match[1];
                 this.contaRecebedor.digitoConta = match[2];
-
-                cy.log('Número da conta:', this.numeroConta);
             })
     }
 

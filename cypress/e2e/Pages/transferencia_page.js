@@ -70,7 +70,7 @@ class TransferenciaForm {
 export const transferenciaForm = new TransferenciaForm()
 
 export const input_transferencia = {
-    valor: faker.finance.amount({ min: 1, max: 333, dec: 2 }),
+    valor: faker.finance.amount({ min: 1, max: 200, dec: 2 }),
     descricao: faker.word.words(),
     numConta: faker.finance.accountNumber(),
     numDigitoConta: faker.finance.accountNumber(1),

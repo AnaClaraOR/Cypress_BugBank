@@ -38,12 +38,29 @@ describe('Extrato', () => {
     })
 
     describe('Deve exibir o saldo disponível no momento', () => {
-        it('When I click in EXTRATO button', () => {
-            extratoForm.clickExtrato()
-        })
-
         it('Then I should see "Saldo disponível"', () => {
-            extratoForm.componentes_extrato.saldoDisponivel().should('contains.text', 'Saldo disponível')
+            transferenciaForm.componentes_transferencia.saldoContaHome().invoke('text')
+                .then((text) => {
+                    const saldoHome = parseFloat(text.replace(/[^\d,-]/g, '').replace(',', '.'));
+                    cy.wrap(saldoHome).as('saldoHome');
+                    extratoForm.clickExtrato()
+                });
+
+            extratoForm.componentes_extrato.dataTransacao().should('be.visible')
+                .then((text) => {
+                    extratoForm.componentes_extrato.saldoExtrato().invoke('text')
+                        .then((text) => {
+                            const saldoDisponivel = parseFloat(text.replace(/[^\d,-]/g, '').replace(',', '.'));
+                            cy.wrap(saldoDisponivel).as('saldoDisponivel');
+                            cy.log(`Saldo Extrato: ${saldoDisponivel}`);
+                        });
+                });
+
+            cy.get('@saldoDisponivel').then((saldoDisponivel) => {
+                cy.get('@saldoHome').then((saldoHome) => {
+                    expect(saldoDisponivel).to.equal(saldoHome);
+                });
+            });
         })
     })
 

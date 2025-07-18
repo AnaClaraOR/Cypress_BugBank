@@ -34,7 +34,7 @@ Realizei os testes das seguintes funcionalidades:
 ## Casos de Testes 
 Os casos de testes, escritos em Gherkin, são fortemente embasados em cima dos requisitos impostos pela aplicação.
 
-- **[🐞 BugBank Features](./features)**
+- **[🐞 BugBank Features](./cypress/e2e/Features/)**
 
 ## Contribuinte
 Este projeto foi realizado por: 

@@ -8,7 +8,6 @@ export const cadastroLocators = {
     confirmaSenhaInput: '.card__register [name="passwordConfirmation"]',
     contaSaldoBnt: () => cy.get('.card__register #toggleAddBalance'),
     alert: () => cy.get('.styles__ContainerInformations-sc-8zteav-3'),
-    
     fecharBnt: () => cy.get('#btnCloseModal'),
     saldoConta: () => cy.get('#textBalance')
 };

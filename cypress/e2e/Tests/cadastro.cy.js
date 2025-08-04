@@ -1,6 +1,7 @@
 import { loginForm } from "../Pages/login_page"
 const { env } = require('../../support/env-dinamico')
 import { cadastroLocators } from '../../support/locators/cadastroLocators';
+import { loginLocators } from "../../support/locators/loginLocators";
 
 describe('Cadastro de usuário', () => {
 
@@ -303,15 +304,15 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I enter email address in "E-mail" field registered', () => {
-            cy.get('.card__login [name="email"]').type(env.email, { force: true })
+            cy.get(loginLocators.emailInput).type(env.email, { force: true })
         })
 
         it('And I enter password in "Senha" field registered', () => {
-            cy.get('.card__login [name="password"]').type(env.senha, { force: true })
+            cy.get(loginLocators.senhaInput).type(env.senha, { force: true })
         })
 
         it('And I click in Acessar button', () => {
-            loginForm.clickAcessar()
+            loginLocators.acessarBnt().click()
         })
 
         it('Then I should see "Saldo em conta R$ 1.000,00"', () => {
@@ -359,15 +360,15 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I enter email address in "E-mail" field registered', () => {
-            cy.get('.card__login [name="email"]').type(env.email, { force: true })
+            cy.get(loginLocators.emailInput).type(env.email, { force: true })
         })
 
         it('And I enter password in "Senha" field registered', () => {
-            cy.get('.card__login [name="password"]').type(env.senha, { force: true })
+            cy.get(loginLocators.senhaInput).type(env.senha, { force: true })
         })
 
         it('And I click in Acessar button', () => {
-            loginForm.clickAcessar()
+            loginLocators.acessarBnt().click()
         })
 
         it('Then I should see "Saldo em conta R$ 0,00"', () => {

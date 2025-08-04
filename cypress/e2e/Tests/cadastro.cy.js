@@ -1,6 +1,6 @@
-import { cadastroForm, input_vazio } from "../Pages/cadastro_page"
 import { loginForm } from "../Pages/login_page"
 const { env } = require('../../support/env-dinamico')
+import { cadastroLocators } from '../../support/locators/cadastroLocators';
 
 describe('Cadastro de usuário', () => {
 
@@ -13,15 +13,15 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I click in Registrar button', () => {
-            cadastroForm.clickRegistrar()
+            cadastroLocators.registrarBnt().click()
         })
 
         it('And I click in Cadastrar button', () => {
-            cadastroForm.clickCadastrar()
+            cadastroLocators.cadastrarBnt().click({ force: true })
         })
 
         it('Then I should see the mensage in fields "É campo obrigatório"', () => {
-            cadastroForm.componentes_cadastro.alertObrigatorio().should('contains.text', 'É campo obrigatório')
+            cadastroLocators.alertObrigatorio().should('contains.text', 'É campo obrigatório')
         })
     })
 
@@ -32,30 +32,30 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I click in Registrar button', () => {
-            cadastroForm.clickRegistrar()
+            cadastroLocators.registrarBnt().click()
         })
 
         it(`Then I enter email address in "E-mail" field`, () => {
             cy.log(`Email gerado: ${env.email}`)
-            cy.get('.card__register [type="email"]').type(env.email, { force: true })
+            cy.get(cadastroLocators.emailInput).type(env.email, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.senhaInput).type(env.senha, { force: true })
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.confirmaSenhaInput).type(env.senha, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
-            cadastroForm.clickCadastrar()
+            cadastroLocators.cadastrarBnt().click({ force: true })
         })
 
         it('Then I should see the mensage "Nome não pode ser vazio"', () => {
-            cadastroForm.componentes_cadastro.alert().should('contains.text', 'Nome não pode ser vazio')
+            cadastroLocators.alert().should('contains.text', 'Nome não pode ser vazio')
         })
     })
 
@@ -66,26 +66,26 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I click in Registrar button', () => {
-            cadastroForm.clickRegistrar()
+            cadastroLocators.registrarBnt().click()
         })
 
         it('And I enter name in "Nome" field', () => {
             cy.log(`Nome gerado: ${env.nome}`)
-            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
+            cy.get(cadastroLocators.nomeInput).type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.senhaInput).type(env.senha, { force: true })
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.confirmaSenhaInput).type(env.senha, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
-            cadastroForm.clickCadastrar()
+            cadastroLocators.cadastrarBnt().click({ force: true })
         })
 
         it('Then I should see the mensage "Email não pode ser vazio"', () => {
@@ -96,7 +96,7 @@ describe('Cadastro de usuário', () => {
              * obrigatório'
              */
 
-            //cadastroForm.componentes_cadastro.alert().should('contains.text', 'Email não pode ser vazio')
+            //cadastroLocators.alert().should('contains.text', 'Email não pode ser vazio')
         })
     })
 
@@ -107,26 +107,26 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I click in Registrar button', () => {
-            cadastroForm.clickRegistrar()
+            cadastroLocators.registrarBnt().click()
         })
 
         it('Then I enter email address empty in "E-mail" field', () => {
             cy.log(`Email gerado: ${env.email}`)
-            cy.get('.card__register [type="email"]').type(env.email, { force: true })
+            cy.get(cadastroLocators.emailInput).type(env.email, { force: true })
         })
 
         it('And I enter name in "Nome" field', () => {
             cy.log(`Nome gerado: ${env.nome}`)
-            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
+            cy.get(cadastroLocators.nomeInput).type(env.nome, { force: true })
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.confirmaSenhaInput).type(env.senha, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
-            cadastroForm.clickCadastrar()
+            cadastroLocators.cadastrarBnt().click({ force: true })
         })
 
         it('Then I should see the mensage "Senha não pode ser vazio"', () => {
@@ -137,7 +137,7 @@ describe('Cadastro de usuário', () => {
              * obrigatório'
              */
 
-            //cadastroForm.componentes_cadastro.alert().should('contains.text', 'Senha não pode ser vazio')
+            //cadastroLocators.alert().should('contains.text', 'Senha não pode ser vazio')
         })
     })
 
@@ -148,27 +148,26 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I click in Registrar button', () => {
-            cadastroForm.clickRegistrar()
+            cadastroLocators.registrarBnt().click()
         })
 
         it('Then I enter email address in "E-mail" field', () => {
             cy.log(`Email gerado: ${env.email}`)
-            cy.get('.card__register [type="email"]').type(env.email, { force: true })
+            cy.get(cadastroLocators.emailInput).type(env.email, { force: true })
         })
-
 
         it('And I enter name in "Nome" field', () => {
             cy.log(`Nome gerado: ${env.nome}`)
-            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
+            cy.get(cadastroLocators.nomeInput).type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.senhaInput).type(env.senha, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
-            cadastroForm.clickCadastrar()
+            cadastroLocators.cadastrarBnt().click({ force: true })
         })
 
         it('Then I should see the mensage "Confirmar senha não pode ser vazio"', () => {
@@ -179,7 +178,7 @@ describe('Cadastro de usuário', () => {
              * obrigatório'
              */
 
-            //cadastroForm.componentes_cadastro.alert().should('contains.text', 'Confirmar senha não pode ser vazio')
+            //cadastroLocators.alert().should('contains.text', 'Confirmar senha não pode ser vazio')
         })
     })
 
@@ -190,35 +189,35 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I click in Registrar button', () => {
-            cadastroForm.clickRegistrar()
+            cadastroLocators.registrarBnt().click()
         })
 
         it('Then I enter email address in "E-mail" field', () => {
             cy.log(`Email gerado: ${env.email}`)
-            cy.get('.card__register [type="email"]').type(env.email, { force: true })
+            cy.get(cadastroLocators.emailInput).type(env.email, { force: true })
         })
 
         it('And I enter name in "Nome" field', () => {
             cy.log(`Nome gerado: ${env.nome}`)
-            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
+            cy.get(cadastroLocators.nomeInput).type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.senhaInput).type(env.senha, { force: true })
         })
 
         it('And I enter different password confirmation in "Confirmação Senha" field', () => {
             cy.log(`Senha gerado: ${env.confirmaSenhaFaker}`)
-            cy.get('.card__register [name="passwordConfirmation"]').type(env.confirmaSenhaFaker, { force: true })
+            cy.get(cadastroLocators.confirmaSenhaInput).type(env.confirmaSenhaFaker, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
-            cadastroForm.clickCadastrar()
+            cadastroLocators.cadastrarBnt().click({ force: true })
         })
 
         it('Then I should see the mensage "As senhas não são iguais."', () => {
-            cadastroForm.componentes_cadastro.alert().should('contains.text', 'As senhas não são iguais.')
+            cadastroLocators.alert().should('contains.text', 'As senhas não são iguais.')
         })
     })
 
@@ -229,35 +228,35 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I click in Registrar button', () => {
-            cadastroForm.clickRegistrar()
+            cadastroLocators.registrarBnt().click()
         })
 
         it('Then I enter email address in "E-mail" field', () => {
             cy.log(`Email gerado: ${env.email}`)
-            cy.get('.card__register [type="email"]').type(env.email, { force: true })
+            cy.get(cadastroLocators.emailInput).type(env.email, { force: true })
         })
 
         it('And I enter name in "Nome" field', () => {
             cy.log(`Nome gerado: ${env.nome}`)
-            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
+            cy.get(cadastroLocators.nomeInput).type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.senhaInput).type(env.senha, { force: true })
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.confirmaSenhaInput).type(env.senha, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
-            cadastroForm.clickCadastrar()
+            cadastroLocators.cadastrarBnt().click({ force: true })
         })
 
         it(`Then I should see the mensage "A conta XXX foi criada com sucesso"`, () => {
-            cadastroForm.componentes_cadastro.alert().invoke('text').should('match', /^A conta \d+-\d+ foi criada com sucessoFechar$/)
+            cadastroLocators.alert().invoke('text').should('match', /^A conta \d+-\d+ foi criada com sucessoFechar$/)
         })
     })
 
@@ -268,39 +267,39 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I click in Registrar button', () => {
-            cadastroForm.clickRegistrar()
+            cadastroLocators.registrarBnt().click()
         })
 
         it('Then I enter email address in "E-mail" field', () => {
             cy.log(`Email gerado: ${env.email}`)
-            cy.get('.card__register [type="email"]').type(env.email, { force: true })
+            cy.get(cadastroLocators.emailInput).type(env.email, { force: true })
         })
 
         it('And I enter name in "Nome" field', () => {
             cy.log(`Nome gerado: ${env.nome}`)
-            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
+            cy.get(cadastroLocators.nomeInput).type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.senhaInput).type(env.senha, { force: true })
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.confirmaSenhaInput).type(env.senha, { force: true })
         })
 
         it('And I click activate in "Criar conta com saldo ?"', () => {
-            cadastroForm.clickContaSaldo()
+            cadastroLocators.contaSaldoBnt().click({ force: true })
         })
 
         it('And I click in Cadastrar button', () => {
-            cadastroForm.clickCadastrar()
+            cadastroLocators.cadastrarBnt().click({ force: true })
         })
 
         it('And I click in Fechar button', () => {
-            cadastroForm.clickFechar()
+            cadastroLocators.fecharBnt().click
         })
 
         it('When I enter email address in "E-mail" field registered', () => {
@@ -316,7 +315,7 @@ describe('Cadastro de usuário', () => {
         })
 
         it('Then I should see "Saldo em conta R$ 1.000,00"', () => {
-            cadastroForm.componentes_cadastro.saldoConta().should('contains.text', "1.000,00")
+            cadastroLocators.saldoConta().should('contains.text', "1.000,00")
         })
     })
 
@@ -328,35 +327,35 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I click in Registrar button', () => {
-            cadastroForm.clickRegistrar()
+            cadastroLocators.registrarBnt().click()
         })
 
         it('Then I enter email address in "E-mail" field', () => {
             cy.log(`Email gerado: ${env.email}`)
-            cy.get('.card__register [type="email"]').type(env.email, { force: true })
+            cy.get(cadastroLocators.emailInput).type(env.email, { force: true })
         })
 
         it('And I enter name in "Nome" field', () => {
             cy.log(`Nome gerado: ${env.nome}`)
-            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
+            cy.get(cadastroLocators.nomeInput).type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.senhaInput).type(env.senha, { force: true })
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
-            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
+            cy.get(cadastroLocators.confirmaSenhaInput).type(env.senha, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
-            cadastroForm.clickCadastrar()
+            cadastroLocators.cadastrarBnt().click({ force: true })
         })
 
         it('And I click in Fechar button', () => {
-            cadastroForm.clickFechar()
+            cadastroLocators.fecharBnt().click()
         })
 
         it('When I enter email address in "E-mail" field registered', () => {
@@ -372,7 +371,7 @@ describe('Cadastro de usuário', () => {
         })
 
         it('Then I should see "Saldo em conta R$ 0,00"', () => {
-            cadastroForm.componentes_cadastro.saldoConta().should('contains.text', '0,00')
+            cadastroLocators.saldoConta().should('contains.text', '0,00')
         })
     })
 })

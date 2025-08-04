@@ -73,9 +73,3 @@ class CadastroForm {
 }
 
 export const cadastroForm = new CadastroForm()
-
-export const input_vazio = {
-    email: '',
-    senha: '',
-    nome: ''
-}

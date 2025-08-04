@@ -40,11 +40,6 @@ describe('Cadastro de usuário', () => {
             cy.get('.card__register [type="email"]').type(env.email, { force: true })
         })
 
-        it('And I enter name empty in "Nome" field', () => {
-            cadastroForm.typeNomeRegister(input_vazio.nome)
-            cy.log(`Nome: ${input_vazio.nome}`);
-        })
-
         it('And I enter password in "Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
             cy.get('.card__register [name="password"]').type(env.senha, { force: true })
@@ -72,11 +67,6 @@ describe('Cadastro de usuário', () => {
 
         it('When I click in Registrar button', () => {
             cadastroForm.clickRegistrar()
-        })
-
-        it('Then I enter email address empty in "E-mail" field', () => {
-            cadastroForm.typeEmailRegister(input_vazio.email)
-            cy.log(`Email: ${input_vazio.email}`);
         })
 
         it('And I enter name in "Nome" field', () => {
@@ -130,11 +120,6 @@ describe('Cadastro de usuário', () => {
             cy.get('.card__register [type="name"]').type(env.nome, { force: true })
         })
 
-        it('And I enter password in empty "Senha" field', () => {
-            cadastroForm.typeSenhaRegister(input_vazio.senha)
-            cy.log(`Senha: ${input_vazio.senha}`);
-        })
-
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
             cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
@@ -170,7 +155,7 @@ describe('Cadastro de usuário', () => {
             cy.log(`Email gerado: ${env.email}`)
             cy.get('.card__register [type="email"]').type(env.email, { force: true })
         })
-    
+
 
         it('And I enter name in "Nome" field', () => {
             cy.log(`Nome gerado: ${env.nome}`)
@@ -180,11 +165,6 @@ describe('Cadastro de usuário', () => {
         it('And I enter password in "Senha" field', () => {
             cy.log(`Senha gerado: ${env.senha}`)
             cy.get('.card__register [name="password"]').type(env.senha, { force: true })
-        })
-
-        it('And I enter password confirmation in empty "Confirmação Senha" field', () => {
-            cadastroForm.typeConfirmaSenha(input_vazio.senha)
-            cy.log(`Confirmação Senha: ${input_vazio.senha}`);
         })
 
         it('And I click in Cadastrar button', () => {

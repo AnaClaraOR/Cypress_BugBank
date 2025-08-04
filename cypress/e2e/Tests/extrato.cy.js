@@ -1,32 +1,18 @@
-import { cadastroForm, input_registro, input_registro_conta_2 } from "../Pages/cadastro_page"
+import { fluxoCadastroContaComSucesso2 } from "../../support/testSuites/funcoesReutilizaveis"
+import { cadastroForm } from "../Pages/cadastro_page"
 import { extratoForm } from "../Pages/extrato_page"
 import { loginForm } from "../Pages/login_page"
 import { transferenciaForm, input_transferencia } from "../Pages/transferencia_page"
+import { fluxoCadastroContaComSucesso } from "../../support/testSuites/funcoesReutilizaveis"
+const { env } = require('../../support/env-dinamico')
 
 describe('Extrato', () => {
 
     before('Given I have registered and am logged in', () => {
-        cy.visit('/')
-        cadastroForm.clickRegistrar()
-        cadastroForm.typeEmailRegister(input_registro.email)
-        cadastroForm.typeNomeRegister(input_registro.nome)
-        cadastroForm.typeSenhaRegister(input_registro.senha)
-        cadastroForm.typeConfirmaSenha(input_registro.senha)
-        cadastroForm.clickContaSaldo()
-        cy.wait(2000)
-        cadastroForm.clickCadastrar()
-        cadastroForm.clickFechar()
-        cy.visit('/')
-        cadastroForm.clickRegistrar()
-        cadastroForm.typeEmailRegister(input_registro_conta_2.email2)
-        cadastroForm.typeNomeRegister(input_registro_conta_2.nome2)
-        cadastroForm.typeSenhaRegister(input_registro_conta_2.senha2)
-        cadastroForm.typeConfirmaSenha(input_registro_conta_2.senha2)
-        cadastroForm.clickCadastrar()
-        cadastroForm.numeroDaConta()
-        cadastroForm.clickFechar()
-        loginForm.typeEmail(input_registro.email)
-        loginForm.typeSenha(input_registro.senha)
+        fluxoCadastroContaComSucesso();
+        fluxoCadastroContaComSucesso2();
+        cy.get('.card__login [name="email"]').type(env.email, { force: true })
+        cy.get('.card__login [name="password"]').type(env.senha, { force: true })
         loginForm.clickAcessar()
         transferenciaForm.clickTransferencia()
         transferenciaForm.typeNumeroConta(cadastroForm.contaRecebedor.numeroConta)

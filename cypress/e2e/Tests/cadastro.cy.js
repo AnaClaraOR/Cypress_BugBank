@@ -1,5 +1,6 @@
-import { cadastroForm, input_registro, input_vazio } from "../Pages/cadastro_page"
+import { cadastroForm, input_vazio } from "../Pages/cadastro_page"
 import { loginForm } from "../Pages/login_page"
+const { env } = require('../../support/env-dinamico')
 
 describe('Cadastro de usuário', () => {
 
@@ -35,8 +36,8 @@ describe('Cadastro de usuário', () => {
         })
 
         it(`Then I enter email address in "E-mail" field`, () => {
-            cadastroForm.typeEmailRegister(input_registro.email)
-            cy.log(`Email: ${input_registro.email}`);
+            cy.log(`Email gerado: ${env.email}`)
+            cy.get('.card__register [type="email"]').type(env.email, { force: true })
         })
 
         it('And I enter name empty in "Nome" field', () => {
@@ -45,13 +46,13 @@ describe('Cadastro de usuário', () => {
         })
 
         it('And I enter password in "Senha" field', () => {
-            cadastroForm.typeSenhaRegister(input_registro.senha)
-            cy.log(`Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
-            cadastroForm.typeConfirmaSenha(input_registro.senha)
-            cy.log(`Confirmação Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
@@ -79,18 +80,18 @@ describe('Cadastro de usuário', () => {
         })
 
         it('And I enter name in "Nome" field', () => {
-            cadastroForm.typeNomeRegister(input_registro.nome)
-            cy.log(`Nome: ${input_registro.nome}`);
+            cy.log(`Nome gerado: ${env.nome}`)
+            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
-            cadastroForm.typeSenhaRegister(input_registro.senha)
-            cy.log(`Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
-            cadastroForm.typeConfirmaSenha(input_registro.senha)
-            cy.log(`Confirmação Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
@@ -120,13 +121,13 @@ describe('Cadastro de usuário', () => {
         })
 
         it('Then I enter email address empty in "E-mail" field', () => {
-            cadastroForm.typeEmailRegister(input_registro.email)
-            cy.log(`Email: ${input_registro.email}`);
+            cy.log(`Email gerado: ${env.email}`)
+            cy.get('.card__register [type="email"]').type(env.email, { force: true })
         })
 
         it('And I enter name in "Nome" field', () => {
-            cadastroForm.typeNomeRegister(input_registro.nome)
-            cy.log(`Nome: ${input_registro.nome}`);
+            cy.log(`Nome gerado: ${env.nome}`)
+            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
         })
 
         it('And I enter password in empty "Senha" field', () => {
@@ -135,8 +136,8 @@ describe('Cadastro de usuário', () => {
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
-            cadastroForm.typeConfirmaSenha(input_registro.senha)
-            cy.log(`Confirmação Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
@@ -166,18 +167,19 @@ describe('Cadastro de usuário', () => {
         })
 
         it('Then I enter email address in "E-mail" field', () => {
-            cadastroForm.typeEmailRegister(input_registro.email)
-            cy.log(`Email: ${input_registro.email}`);
+            cy.log(`Email gerado: ${env.email}`)
+            cy.get('.card__register [type="email"]').type(env.email, { force: true })
         })
+    
 
         it('And I enter name in "Nome" field', () => {
-            cadastroForm.typeNomeRegister(input_registro.nome)
-            cy.log(`Nome: ${input_registro.nome}`);
+            cy.log(`Nome gerado: ${env.nome}`)
+            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
-            cadastroForm.typeSenhaRegister(input_registro.senha)
-            cy.log(`Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
         })
 
         it('And I enter password confirmation in empty "Confirmação Senha" field', () => {
@@ -212,23 +214,23 @@ describe('Cadastro de usuário', () => {
         })
 
         it('Then I enter email address in "E-mail" field', () => {
-            cadastroForm.typeEmailRegister(input_registro.email)
-            cy.log(`Email: ${input_registro.email}`);
+            cy.log(`Email gerado: ${env.email}`)
+            cy.get('.card__register [type="email"]').type(env.email, { force: true })
         })
 
         it('And I enter name in "Nome" field', () => {
-            cadastroForm.typeNomeRegister(input_registro.nome)
-            cy.log(`Nome: ${input_registro.nome}`);
+            cy.log(`Nome gerado: ${env.nome}`)
+            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
-            cadastroForm.typeSenhaRegister(input_registro.senha)
-            cy.log(`Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
         })
 
         it('And I enter different password confirmation in "Confirmação Senha" field', () => {
-            cadastroForm.typeConfirmaSenha(input_registro.confirmaSenhaFaker)
-            cy.log(`Confirmação Senha: ${input_registro.confirmaSenhaFaker}`);
+            cy.log(`Senha gerado: ${env.confirmaSenhaFaker}`)
+            cy.get('.card__register [name="passwordConfirmation"]').type(env.confirmaSenhaFaker, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
@@ -251,23 +253,23 @@ describe('Cadastro de usuário', () => {
         })
 
         it('Then I enter email address in "E-mail" field', () => {
-            cadastroForm.typeEmailRegister(input_registro.email)
-            cy.log(`Email: ${input_registro.email}`);
+            cy.log(`Email gerado: ${env.email}`)
+            cy.get('.card__register [type="email"]').type(env.email, { force: true })
         })
 
         it('And I enter name in "Nome" field', () => {
-            cadastroForm.typeNomeRegister(input_registro.nome)
-            cy.log(`Nome: ${input_registro.nome}`);
+            cy.log(`Nome gerado: ${env.nome}`)
+            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
-            cadastroForm.typeSenhaRegister(input_registro.senha)
-            cy.log(`Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
-            cadastroForm.typeConfirmaSenha(input_registro.senha)
-            cy.log(`Confirmação Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
@@ -290,23 +292,23 @@ describe('Cadastro de usuário', () => {
         })
 
         it('Then I enter email address in "E-mail" field', () => {
-            cadastroForm.typeEmailRegister(input_registro.email)
-            cy.log(`Email: ${input_registro.email}`);
+            cy.log(`Email gerado: ${env.email}`)
+            cy.get('.card__register [type="email"]').type(env.email, { force: true })
         })
 
         it('And I enter name in "Nome" field', () => {
-            cadastroForm.typeNomeRegister(input_registro.nome)
-            cy.log(`Nome: ${input_registro.nome}`);
+            cy.log(`Nome gerado: ${env.nome}`)
+            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
-            cadastroForm.typeSenhaRegister(input_registro.senha)
-            cy.log(`Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
-            cadastroForm.typeConfirmaSenha(input_registro.senha)
-            cy.log(`Confirmação Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
         })
 
         it('And I click activate in "Criar conta com saldo ?"', () => {
@@ -322,13 +324,11 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I enter email address in "E-mail" field registered', () => {
-            loginForm.typeEmail(input_registro.email)
-            cy.log(`Email: ${input_registro.email}`);
+            cy.get('.card__login [name="email"]').type(env.email, { force: true })
         })
 
         it('And I enter password in "Senha" field registered', () => {
-            loginForm.typeSenha(input_registro.senha)
-            cy.log(`Senha: ${input_registro.senha}`);
+            cy.get('.card__login [name="password"]').type(env.senha, { force: true })
         })
 
         it('And I click in Acessar button', () => {
@@ -352,23 +352,23 @@ describe('Cadastro de usuário', () => {
         })
 
         it('Then I enter email address in "E-mail" field', () => {
-            cadastroForm.typeEmailRegister(input_registro.email)
-            cy.log(`Email: ${input_registro.email}`);
+            cy.log(`Email gerado: ${env.email}`)
+            cy.get('.card__register [type="email"]').type(env.email, { force: true })
         })
 
         it('And I enter name in "Nome" field', () => {
-            cadastroForm.typeNomeRegister(input_registro.nome)
-            cy.log(`Nome: ${input_registro.nome}`);
+            cy.log(`Nome gerado: ${env.nome}`)
+            cy.get('.card__register [type="name"]').type(env.nome, { force: true })
         })
 
         it('And I enter password in "Senha" field', () => {
-            cadastroForm.typeSenhaRegister(input_registro.senha)
-            cy.log(`Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="password"]').type(env.senha, { force: true })
         })
 
         it('And I enter password confirmation in "Confirmação Senha" field', () => {
-            cadastroForm.typeConfirmaSenha(input_registro.senha)
-            cy.log(`Confirmação Senha: ${input_registro.senha}`);
+            cy.log(`Senha gerado: ${env.senha}`)
+            cy.get('.card__register [name="passwordConfirmation"]').type(env.senha, { force: true })
         })
 
         it('And I click in Cadastrar button', () => {
@@ -380,13 +380,11 @@ describe('Cadastro de usuário', () => {
         })
 
         it('When I enter email address in "E-mail" field registered', () => {
-            loginForm.typeEmail(input_registro.email)
-            cy.log(`Email: ${input_registro.email}`);
+            cy.get('.card__login [name="email"]').type(env.email, { force: true })
         })
 
         it('And I enter password in "Senha" field registered', () => {
-            loginForm.typeSenha(input_registro.senha)
-            cy.log(`Senha: ${input_registro.senha}`);
+            cy.get('.card__login [name="password"]').type(env.senha, { force: true })
         })
 
         it('And I click in Acessar button', () => {

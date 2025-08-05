@@ -8,6 +8,15 @@ module.exports = {
     confirmaSenhaFaker: faker.internet.password({ length: 4 }),
     email2: faker.internet.email(),
     nome2: faker.person.fullName(),
-    senha2: faker.internet.password({ length: 5 })
+    senha2: faker.internet.password({ length: 5 }),
+
+    valorTransferencia: faker.finance.amount({ min: 1, max: 200, dec: 2 }),
+    descricao: faker.word.words(),
+    numConta: faker.finance.accountNumber(),
+    numDigitoConta: faker.finance.accountNumber(1),
+    valorMenor: faker.finance.amount({ min: 0, max: 3, dec: 2, symbol: '-' }),
+    valorMaior: faker.finance.amount({ min: 1000, max: 2000, dec: 2 }),
+    numContaInvalida: faker.string.alphanumeric(5),
+    numDigitoContaInvalida: faker.string.alphanumeric(2),
   }
 }

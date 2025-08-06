@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import { transferenciaLocators } from "./locators/transferenciaLocators";
+const { env } = require('../support/env-dinamico')
 
 //Comando customizavel para a coleta do número da conta
 Cypress.Commands.add('numeroDaConta', () => {
@@ -35,7 +36,9 @@ Cypress.Commands.add('numeroDaConta', () => {
             const [_, numeroConta, digitoConta] = match;
 
             Cypress.env('numeroConta', numeroConta);
+            cy.log(`numeroConta: ${numeroConta}`);
             Cypress.env('digitoConta', digitoConta);
+            cy.log(`digitoConta: ${digitoConta}`);
         });
 });
 
@@ -48,3 +51,15 @@ Cypress.Commands.add('saldo', () => {
             return saldoContaHome;
         });
 });
+
+Cypress.Commands.add('fluxoTransferenciaComSucesso', () => {
+    transferenciaLocators.transferenciaBnt().click();
+
+    const numeroConta = Cypress.env('numeroConta');
+    const digitoConta = Cypress.env('digitoConta');
+    cy.get(transferenciaLocators.numeroContaField).type(numeroConta);
+    cy.get(transferenciaLocators.digitoContaField).type(digitoConta);
+    cy.get(transferenciaLocators.valorTransferenciaField).type(env.valorTransferencia);
+
+    transferenciaLocators.transferirBnt().click();
+})

@@ -1,5 +1,4 @@
 import { fluxoCadastroContaComSucesso2 } from "../../support/testSuites/funcoesReutilizaveis"
-import { cadastroForm } from "../Pages/cadastro_page"
 import { transferenciaForm } from "../Pages/transferencia_page"
 import { fluxoCadastroContaComSucesso } from "../../support/testSuites/funcoesReutilizaveis"
 import { loginLocators } from "../../support/locators/loginLocators"
@@ -23,11 +22,15 @@ describe('Transação', () => {
     })
 
     it('Then I enter account number in "Número da conta" field', () => {
-      transferenciaForm.typeNumeroConta(cadastroForm.contaRecebedor.numeroConta)
+      const numeroConta = Cypress.env('numeroConta');
+      cy.log(`Conta recebida: ${numeroConta}`);
+      cy.get(transferenciaLocators.numeroContaField).type(numeroConta)
     })
 
     it('And I enter digit in "Dígito" field', () => {
-      transferenciaForm.typeDigitoConta(cadastroForm.contaRecebedor.digitoConta)
+      const digitoConta = Cypress.env('digitoConta');
+      cy.log(`digito recebida: ${digitoConta}`);
+      cy.get(transferenciaLocators.digitoContaField).type(digitoConta)
     })
 
     it('And I enter value in "Valor da transferência" field', () => {
@@ -54,22 +57,24 @@ describe('Transação', () => {
   })
 
   describe('Só é permitido transferência quando saldo é igual ou maior que valor para transferir', () => {
-    //Se não for utilizado o botão do voltar para limpar a tela, tem que comentar esse ponto
     it('When I click in voltar button', () => {
       transferenciaLocators.voltarBnt().click()
     })
 
-    //Se não for utilizado o botão do voltar para limpar a tela, tem que comentar esse ponto
     it('And I click in TRANSFERÊNCIA button', () => {
       transferenciaLocators.transferenciaBnt().click()
     })
 
     it('Then I enter account number in "Número da conta" field', () => {
-      transferenciaForm.typeNumeroConta(cadastroForm.contaRecebedor.numeroConta)
+      const numeroConta = Cypress.env('numeroConta');
+      cy.log(`Conta recebida: ${numeroConta}`);
+      cy.get(transferenciaLocators.numeroContaField).type(numeroConta)
     })
 
     it('And I enter digit in "Dígito" field', () => {
-      transferenciaForm.typeDigitoConta(cadastroForm.contaRecebedor.digitoConta)
+      const digitoConta = Cypress.env('digitoConta');
+      cy.log(`digito recebida: ${digitoConta}`);
+      cy.get(transferenciaLocators.digitoContaField).type(digitoConta)
     })
 
     it('And I enter value in "Valor da transferência" field', () => {
@@ -101,7 +106,6 @@ describe('Transação', () => {
       transferenciaLocators.voltarBnt().click()
     })
 
-    //Se não for utilizado o botão do voltar para limpar a tela, tem que comentar esse ponto
     it('And I click in TRANSFERÊNCIA button', () => {
       transferenciaLocators.transferenciaBnt().click()
     })
@@ -116,7 +120,6 @@ describe('Transação', () => {
       cy.get(transferenciaLocators.digitoContaField).type(env.numDigitoConta)
     })
 
-    //Se não for utilizado o botão do voltar para limpar a tela, tem que comentar esse ponto
     it('And I enter value in "Valor da transferência" field', () => {
       cy.log(`Valor transferência gerado: ${env.valorTransferencia}`)
       cy.get(transferenciaLocators.valorTransferenciaField).type(env.valorTransferencia)
@@ -146,7 +149,6 @@ describe('Transação', () => {
       transferenciaLocators.voltarBnt().click()
     })
 
-    //Se não for utilizado o botão do voltar para limpar a tela, tem que comentar esse ponto
     it('And I click in TRANSFERÊNCIA button', () => {
       transferenciaLocators.transferenciaBnt().click()
     })
@@ -195,11 +197,15 @@ describe('Transação', () => {
     })
 
     it('Then I enter account number in "Número da conta" field', () => {
-      transferenciaForm.typeNumeroConta(cadastroForm.contaRecebedor.numeroConta)
+      const numeroConta = Cypress.env('numeroConta');
+      cy.log(`Conta recebida: ${numeroConta}`);
+      cy.get(transferenciaLocators.numeroContaField).type(numeroConta)
     })
 
     it('And I enter digit in "Dígito" field', () => {
-      transferenciaForm.typeDigitoConta(cadastroForm.contaRecebedor.digitoConta)
+      const digitoConta = Cypress.env('digitoConta');
+      cy.log(`digito recebida: ${digitoConta}`);
+      cy.get(transferenciaLocators.digitoContaField).type(digitoConta)
     })
 
     it('And I enter value in "Valor da transferência" field', () => {
@@ -235,11 +241,15 @@ describe('Transação', () => {
     })
 
     it('Then I enter account number in "Número da conta" field', () => {
-      transferenciaForm.typeNumeroConta(cadastroForm.contaRecebedor.numeroConta)
+      const numeroConta = Cypress.env('numeroConta');
+      cy.log(`Conta recebida: ${numeroConta}`);
+      cy.get(transferenciaLocators.numeroContaField).type(numeroConta)
     })
 
     it('And I enter digit in "Dígito" field', () => {
-      transferenciaForm.typeDigitoConta(cadastroForm.contaRecebedor.digitoConta)
+      const digitoConta = Cypress.env('digitoConta');
+      cy.log(`digito recebida: ${digitoConta}`);
+      cy.get(transferenciaLocators.digitoContaField).type(digitoConta)
     })
 
     it('And I enter value in "Valor da transferência" field', () => {
@@ -270,19 +280,23 @@ describe('Transação', () => {
       transferenciaLocators.voltarBnt().click()
     })
 
-    //Se não for utilizado o botão do voltar para limpar a tela, tem que comentar esse ponto
     it('And I click in TRANSFERÊNCIA button', () => {
-      cy.wait(2000)
-      transferenciaForm.saldoInicial()
+      cy.saldo().then((saldo) => {
+        Cypress.env('saldoHome', saldo);
+      })
       transferenciaLocators.transferenciaBnt().click()
     })
 
     it('Then I enter account number in "Número da conta" field', () => {
-      transferenciaForm.typeNumeroConta(cadastroForm.contaRecebedor.numeroConta)
+      const numeroConta = Cypress.env('numeroConta');
+      cy.log(`Conta recebida: ${numeroConta}`);
+      cy.get(transferenciaLocators.numeroContaField).type(numeroConta)
     })
 
     it('And I enter digit in "Dígito" field', () => {
-      transferenciaForm.typeDigitoConta(cadastroForm.contaRecebedor.digitoConta)
+      const digitoConta = Cypress.env('digitoConta');
+      cy.log(`digito recebida: ${digitoConta}`);
+      cy.get(transferenciaLocators.digitoContaField).type(digitoConta)
     })
 
     it('And I enter value in "Valor da transferência" field', () => {
@@ -307,24 +321,39 @@ describe('Transação', () => {
       transferenciaLocators.voltarBnt().click()
     })
 
-    it('And I checks if the amount was debited from the opening balance', async () => {
-      //await transferenciaForm.saldoFinal()
-      //expect(transferenciaForm.saldoContaFinal).to.equal(Number(transferenciaForm.novoSaldoConta.toFixed(2)))
+    it('And I checks if the amount was debited from the opening balance', () => {
+      cy.saldo().then((saldo) => {
+        Cypress.env('saldoHomeFinal', saldo);
+      }).then(() => {
+        const saldoInicial = Cypress.env('saldoHome');
+        const saldoFinal = Cypress.env('saldoHomeFinal');
+
+        const valorEsperado = Number((saldoInicial - (env.valorTransferencia)).toFixed(2));
+
+        cy.log(`Saldo inicial: ${saldoInicial}`);
+        cy.log(`Saldo final: ${saldoFinal}`);
+        cy.log(`Valor esperado: ${valorEsperado}`);
+
+        expect(saldoFinal).to.equal(valorEsperado);
+      });
     })
   })
 
   describe('Ao realizar uma transferência com sucesso deve ser redirecionado para o extrato', () => {
-    //Se não for utilizado o botão do voltar para limpar a tela, tem que comentar esse ponto
     it('When I click in TRANSFERÊNCIA button', () => {
       transferenciaLocators.transferenciaBnt().click()
     })
 
     it('Then I enter account number in "Número da conta" field', () => {
-      transferenciaForm.typeNumeroConta(cadastroForm.contaRecebedor.numeroConta)
+      const numeroConta = Cypress.env('numeroConta');
+      cy.log(`Conta recebida: ${numeroConta}`);
+      cy.get(transferenciaLocators.numeroContaField).type(numeroConta)
     })
 
     it('And I enter digit in "Dígito" field', () => {
-      transferenciaForm.typeDigitoConta(cadastroForm.contaRecebedor.digitoConta)
+      const digitoConta = Cypress.env('digitoConta');
+      cy.log(`digito recebida: ${digitoConta}`);
+      cy.get(transferenciaLocators.digitoContaField).type(digitoConta)
     })
 
     it('And I enter value in "Valor da transferência" field', () => {

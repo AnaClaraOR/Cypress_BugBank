@@ -59,16 +59,16 @@ class CadastroForm {
         this.componentes_cadastro.contaSaldoBnt().click({ force: true })
     }
 
-    numeroDaConta() {
-        this.componentes_cadastro.alert().invoke('text')
-            .then((text) => {
-                const match = text.match(/(\d+)-(\d+)/);
-                expect(match).to.not.be.null;
-                cy.log(match)
-                this.contaRecebedor.numeroConta = match[1];
-                this.contaRecebedor.digitoConta = match[2];
-            })
-    }
+    // numeroDaConta() {
+    //     this.componentes_cadastro.alert().invoke('text')
+    //         .then((text) => {
+    //             const match = text.match(/(\d+)-(\d+)/);
+    //             expect(match).to.not.be.null;
+    //             cy.log(match)
+    //             this.contaRecebedor.numeroConta = match[1];
+    //             this.contaRecebedor.digitoConta = match[2];
+    //         })
+    // }
 
 }
 

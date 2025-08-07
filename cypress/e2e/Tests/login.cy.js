@@ -6,30 +6,30 @@ describe('Login', () => {
 
   //----------------CENÁRIO 1-------------------
   describe('Email e Senha são campos obrigatórios', () => {
-    it('Given I am on the login page', () => {
+    it('Dado que estou na página de login', () => {
       cy.visit('/')
     })
 
-    it('When I click in Acessar button', () => {
+    it('Quando eu clicar no botão Acessar', () => {
       loginLocators.acessarBnt().click()
     })
 
-    it('Then I should see the mensage in fields "É campo obrigatório"', () => {
+    it('Então devo ver a mensagem nos campos "É campo obrigatório"', () => {
       loginLocators.alertObrigatorio().should('contains.text', 'É campo obrigatório')
     })
   })
 
   //----------------CENÁRIO 2-------------------
   describe('Tentativa de acesso sem preencher campos obrigatórios deve exibir a mensagem "Usuário e senha precisam ser preenchidos"', () => {
-    it('Given I am on the login page', () => {
+    it('Dado que estou na página de login', () => {
       cy.visit('/')
     })
 
-    it('When I click in Acessar button', () => {
+    it('Quando eu clicar no botão Acessar', () => {
       loginLocators.acessarBnt().click()
     })
 
-    it('Then I should see the mensage "Usuário e senha precisam ser preenchidos"', () => {
+    it('Então devo ver a mensagem "Usuário e senha precisam ser preenchidos"', () => {
       /**
      * Dará erro no teste, pois a mensagem do requisito não é 
      * apresentada, ele faz a validação do campo se está vazio 
@@ -43,48 +43,48 @@ describe('Login', () => {
 
   //----------------CENÁRIO 3-------------------
   describe('Não deve autorizar o acesso para usuários inválidos ou não cadastrados.', () => {
-    it('Given I am on the login page', () => {
+    it('Dado que estou na página de login', () => {
       cy.visit('/')
     })
 
-    it('When I enter email address in "E-mail" field not registered', () => {
+    it('Quando eu insiro o endereço de e-mail no campo "E-mail" não registrado', () => {
       cy.log(`Email gerado: ${env.email}`)
       cy.get(loginLocators.emailInput).type(env.email, { force: true })
     })
 
-    it('When I enter password in "Senha" field not registered', () => {
+    it('Quando eu insiro a senha no campo "Senha" não registrado', () => {
       cy.log(`Senha gerada: ${env.senha}`)
       cy.get(loginLocators.senhaInput).type(env.senha, { force: true })
     })
 
-    it('And I click in Acessar button', () => {
+    it('E clico no botão Acessar', () => {
       loginLocators.acessarBnt().click()
     })
 
-    it('And I should see the mensage "Usuário ou senha inválido.Tente novamente ou verifique suas informações!"', () => {
+    it('E eu devo ver a mensagem "Usuário ou senha inválido.Tente novamente ou verifique suas informações!"', () => {
       loginLocators.alertUserInvalido().should('contains.text', 'Usuário ou senha inválido.\nTente novamente ou verifique suas informações!')
     })
   })
 
   //----------------CENÁRIO 4-------------------
   describe('Usuários válidos e cadastros são direcionados para a home', () => {
-    it('Given that I have registered the username and password', () => {
+    it('Dado que registrei o usuário e a senha', () => {
       fluxoCadastroContaComSucesso();
     })
 
-    it('When I enter email address in "E-mail" field', () => {
+    it('Quando eu insiro o endereço de e-mail no campo "E-mail"', () => {
       cy.get(loginLocators.emailInput).type(env.email, { force: true })
     })
 
-    it('And I enter password in "Senha" field', () => {
+    it('E eu coloco a senha no campo "Senha"', () => {
       cy.get(loginLocators.senhaInput).type(env.senha, { force: true })
     })
 
-    it('And I click in Acessar button', () => {
+    it('E eu clico no botão Acessar', () => {
       loginLocators.acessarBnt().click()
     })
 
-    it('Then I should be directed to the home page', () => {
+    it('Então eu deveria ser direcionado para a página inicial', () => {
       loginLocators.textHomePage().should('contains.text', 'bem vindo ao BugBank :)')
     })
   })

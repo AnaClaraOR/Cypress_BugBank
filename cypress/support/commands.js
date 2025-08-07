@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import { transferenciaLocators } from "./locators/transferenciaLocators";
+import { cadastroLocators } from "./locators/cadastroLocators"
 const { env } = require('../support/env-dinamico')
 
 //Comando customizavel para a coleta do número da conta

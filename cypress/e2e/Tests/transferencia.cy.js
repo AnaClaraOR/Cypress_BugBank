@@ -1,5 +1,3 @@
-import { fluxoCadastroContaComSucesso2 } from "../../support/testSuites/funcoesReutilizaveis"
-import { fluxoCadastroContaComSucesso } from "../../support/testSuites/funcoesReutilizaveis"
 import { loginLocators } from "../../support/locators/loginLocators"
 import { cadastroLocators } from '../../support/locators/cadastroLocators';
 import { transferenciaLocators } from "../../support/locators/transferenciaLocators"
@@ -8,11 +6,9 @@ const { env } = require('../../support/env-dinamico')
 describe('Transação', () => {
 
   before('Dado que me registrei e estou logado', () => {
-    fluxoCadastroContaComSucesso();
-    fluxoCadastroContaComSucesso2();
-    cy.get(loginLocators.emailInput).type(env.email, { force: true })
-    cy.get(loginLocators.senhaInput).type(env.senha, { force: true })
-    loginLocators.acessarBnt().click()
+    cy.fluxoCadastro(env.usuario1);
+    cy.fluxoCadastro(env.usuario2);
+    cy.fluxoLogin(env.usuario1);
   })
 
   describe('Só é permitido transferência para contas válidas', () => {

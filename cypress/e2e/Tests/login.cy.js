@@ -1,4 +1,3 @@
-import { fluxoCadastroContaComSucesso } from "../../support/testSuites/funcoesReutilizaveis"
 import { loginLocators } from "../../support/locators/loginLocators"
 const { env } = require('../../support/env-dinamico')
 
@@ -69,7 +68,7 @@ describe('Login', () => {
   //----------------CENÁRIO 4-------------------
   describe('Usuários válidos e cadastros são direcionados para a home', () => {
     it('Dado que registrei o usuário e a senha', () => {
-      fluxoCadastroContaComSucesso();
+      cy.fluxoCadastro(env.usuario1);
     })
 
     it('Quando eu insiro o endereço de e-mail no campo "E-mail"', () => {

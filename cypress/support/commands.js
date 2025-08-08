@@ -26,6 +26,7 @@
 
 import { transferenciaLocators } from "./locators/transferenciaLocators";
 import { cadastroLocators } from "./locators/cadastroLocators"
+import { loginLocators } from "./locators/loginLocators"
 const { env } = require('../support/env-dinamico')
 
 //Comando customizavel para a coleta do número da conta
@@ -43,6 +44,7 @@ Cypress.Commands.add('numeroDaConta', () => {
         });
 });
 
+//Comando customizavel para a coleta do saldo da conta
 Cypress.Commands.add('saldo', () => {
     cy.get(transferenciaLocators.saldoContaHome)
         .invoke('text')
@@ -53,7 +55,8 @@ Cypress.Commands.add('saldo', () => {
         });
 });
 
-Cypress.Commands.add('fluxoTransferenciaComSucesso', () => {
+//Comando customizavel para a execução da transferência entre contas
+Cypress.Commands.add('fluxoTransferencia', () => {
     transferenciaLocators.transferenciaBnt().click();
 
     const numeroConta = Cypress.env('numeroConta');
@@ -63,4 +66,24 @@ Cypress.Commands.add('fluxoTransferenciaComSucesso', () => {
     cy.get(transferenciaLocators.valorTransferenciaField).type(env.valorTransferencia);
 
     transferenciaLocators.transferirBnt().click();
+})
+
+//Comando customizavel para a execução do cadastro
+Cypress.Commands.add('fluxoCadastro', (usuario) => {
+    cy.visit('/')
+    cadastroLocators.registrarBnt().click()
+    cy.get(cadastroLocators.emailInput).type(usuario.email, { force: true })
+    cy.get(cadastroLocators.nomeInput).type(usuario.nome, { force: true })
+    cy.get(cadastroLocators.senhaInput).type(usuario.senha, { force: true })
+    cy.get(cadastroLocators.confirmaSenhaInput).type(usuario.senha, { force: true })
+    cadastroLocators.contaSaldoBnt().click({ force: true })
+    cadastroLocators.cadastrarBnt().click({ force: true })
+    cy.numeroDaConta();
+    cadastroLocators.fecharBnt().click()
+})
+
+Cypress.Commands.add('fluxoLogin', (usuario) => {
+    cy.get(loginLocators.emailInput).type(usuario.email, { force: true })
+    cy.get(loginLocators.senhaInput).type(usuario.senha, { force: true })
+    loginLocators.acessarBnt().click()
 })

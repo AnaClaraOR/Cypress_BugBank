@@ -299,19 +299,15 @@ describe('Cadastro de usuário', () => {
         })
 
         it('E eu clicar no botão Fechar', () => {
-            cadastroLocators.fecharBnt().click
+            cadastroLocators.fecharBnt().click()
         })
 
-        it('Quando eu insiro o endereço de e-mail registrado no campo "E-mail"', () => {
-            cy.get(loginLocators.emailInput).type(env.email, { force: true })
-        })
-
-        it('E eu coloco a senha cadastrada no campo "Senha"', () => {
-            cy.get(loginLocators.senhaInput).type(env.senha, { force: true })
-        })
-
-        it('E eu clicar no botão Acessar', () => {
-            loginLocators.acessarBnt().click()
+        it('Quando eu realizar o login com o acesso registrado', () => {
+            const usuario = {
+                email: env.email,
+                senha: env.senha
+            }
+            cy.fluxoLogin(usuario);
         })
 
         it('Então eu devo ver "Saldo em conta R$ 1.000,00"', () => {
@@ -358,16 +354,12 @@ describe('Cadastro de usuário', () => {
             cadastroLocators.fecharBnt().click()
         })
 
-        it('Quando eu insiro o endereço de e-mail registrado no campo "E-mail"', () => {
-            cy.get(loginLocators.emailInput).type(env.email, { force: true })
-        })
-
-        it('E eu coloco a senha cadastrada no campo "Senha"', () => {
-            cy.get(loginLocators.senhaInput).type(env.senha, { force: true })
-        })
-
-        it('E eu clicar no botão Acessar', () => {
-            loginLocators.acessarBnt().click()
+        it('Quando eu realizar o login com o acesso registrado', () => {
+            const usuario = {
+                email: env.email,
+                senha: env.senha
+            }
+            cy.fluxoLogin(usuario);
         })
 
         it('Então eu devo ver "Saldo em conta R$ 0,00"', () => {

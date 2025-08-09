@@ -7,5 +7,6 @@ export const transferenciaLocators = {
     transferirBnt: () => cy.get('.CMabB[type="submit"]'),
     voltarBnt: () => cy.get('#btnBack'),
     saldoContaHome: '#textBalance > span',
-    alertaConta: '#modalText'
+    alertaConta: '#modalText',
+    sairBnt: () => cy.get('#btnExit')
 };

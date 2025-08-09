@@ -83,6 +83,7 @@ Cypress.Commands.add('fluxoCadastro', (usuario) => {
 })
 
 Cypress.Commands.add('fluxoLogin', (usuario) => {
+    cy.visit('/')
     cy.get(loginLocators.emailInput).type(usuario.email, { force: true })
     cy.get(loginLocators.senhaInput).type(usuario.senha, { force: true })
     loginLocators.acessarBnt().click()

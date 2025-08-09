@@ -5,83 +5,78 @@ const { env } = require('../../support/env-dinamico')
 
 describe('Extrato', () => {
 
-    before('Dado que me registrei e estou logado', () => {
+    beforeEach('Dado que me registrei e estou logado', () => {
         cy.fluxoCadastro(env.usuario1);
         cy.fluxoCadastro(env.usuario2);
         cy.fluxoLogin(env.usuario1);
         cy.fluxoTransferencia();
         cadastroLocators.fecharBnt().click()
         transferenciaLocators.voltarBnt().click()
+        extratoLocators.extratoBnt().click()
     })
 
-    describe('Deve exibir o saldo disponível no momento', () => {
-        it('Então devo ver "Saldo disponível"', () => {
-            cy.get(transferenciaLocators.saldoContaHome).invoke('text')
-                .then((text) => {
-                    const saldoHome = parseFloat(text.replace(/[^\d,-]/g, '').replace(',', '.'));
-                    cy.wrap(saldoHome).as('saldoHome');
-                    extratoLocators.extratoBnt().click()
-                });
+    afterEach(() => {
+        transferenciaLocators.sairBnt().click()
+    })
 
-            extratoLocators.dataTransacao().should('be.visible')
-                .then((text) => {
-                    extratoLocators.saldoExtrato().invoke('text')
-                        .then((text) => {
-                            const saldoDisponivel = parseFloat(text.replace(/[^\d,-]/g, '').replace(',', '.'));
-                            cy.wrap(saldoDisponivel).as('saldoDisponivel');
-                            cy.log(`Saldo Extrato: ${saldoDisponivel}`);
-                        });
-                });
-
-            cy.get('@saldoDisponivel').then((saldoDisponivel) => {
-                cy.get('@saldoHome').then((saldoHome) => {
-                    expect(saldoDisponivel).to.equal(saldoHome);
-                });
+    //-----------------CENÁRIO 1----------------------
+    it('Deve exibir o saldo disponível no momento', () => {
+        cy.get(transferenciaLocators.saldoContaHome).invoke('text')
+            .then((text) => {
+                const saldoHome = parseFloat(text.replace(/[^\d,-]/g, '').replace(',', '.'));
+                cy.wrap(saldoHome).as('saldoHome');
             });
-        })
+
+        extratoLocators.dataTransacao().should('be.visible')
+            .then((text) => {
+                extratoLocators.saldoExtrato().invoke('text')
+                    .then((text) => {
+                        const saldoDisponivel = parseFloat(text.replace(/[^\d,-]/g, '').replace(',', '.'));
+                        cy.wrap(saldoDisponivel).as('saldoDisponivel');
+                        cy.log(`Saldo Extrato: ${saldoDisponivel}`);
+                    });
+            });
+
+        cy.get('@saldoDisponivel').then((saldoDisponivel) => {
+            cy.get('@saldoHome').then((saldoHome) => {
+                expect(saldoDisponivel).to.equal(saldoHome);
+            });
+        });
     })
 
-    describe('Cada transação deve exibir data que foi realizada, tipo da transação (Abertura de conta / Transferência enviada / Transferência recebida)- Quando valor for de saida da conta deve estar em vermelho e iniciar com o sinal de menos/negativo(-)', () => {
-        it('Então eu deveria ver a data da transação', () => {
-            extratoLocators.dataTransacao().invoke('text')
-                .should((text) => {
-                    expect(text.trim()).to.match(/^\d{2}\/\d{2}\/\d{4}$/); // exemplo: 13/07/2025
-                });
-        })
+    //-----------------CENÁRIO 2----------------------
+    it('Cada transação deve exibir data que foi realizada, tipo da transação (Abertura de conta / Transferência enviada / Transferência recebida)- Quando valor for de saida da conta deve estar em vermelho e iniciar com o sinal de menos/negativo(-)', () => {
+        extratoLocators.dataTransacao().invoke('text')
+            .should((text) => {
+                expect(text.trim()).to.match(/^\d{2}\/\d{2}\/\d{4}$/); // exemplo: 13/07/2025
+            });
 
-        it('E devo ver o tipo de transação (Abertura de conta / Transferência enviada / Transferência recebida)', () => {
-            extratoLocators.tipoTransacao().invoke('text')
-                .should((text) => {
-                    expect(text).to.include.oneOf(['Abertura de conta', 'Transferência enviada', 'Transferência recebida']);
-                });
-        })
+        extratoLocators.tipoTransacao().invoke('text')
+            .should((text) => {
+                expect(text).to.include.oneOf(['Abertura de conta', 'Transferência enviada', 'Transferência recebida']);
+            });
 
-        it('E eu deveria ver o valor na cor vermelha e símbolo negativo', () => {
-            extratoLocators.valorExtrato().contains('-').should('have.css', 'color', 'rgb(255, 0, 0)')
-        })
+        extratoLocators.valorExtrato().contains('-').should('have.css', 'color', 'rgb(255, 0, 0)')
     })
 
-    describe('Quando valor for de entrada na conta deve estar em verde', () => {
-        it('Quando eu deveria ver o valor não negativo, o valor deveria ser verde', () => {
-            extratoLocators.tipoTransacao().invoke('text')
-                .should((text) => {
-                    expect(text).to.include.oneOf(['Abertura de conta', 'Transferência recebida']);
-                });
-            // verifica que o valor seja verde
-            extratoLocators.valorExtrato().should('have.css', 'color', 'rgb(0, 128, 0)');
-        })
+    //-----------------CENÁRIO 3----------------------
+    it('Quando valor for de entrada na conta deve estar em verde', () => {
+        extratoLocators.tipoTransacao().invoke('text')
+            .should((text) => {
+                expect(text).to.include.oneOf(['Abertura de conta', 'Transferência recebida']);
+            });
+        extratoLocators.valorExtrato().should('have.css', 'color', 'rgb(0, 128, 0)');
     })
 
-    describe('Transações sem comentário devem exibir (-)', () => {
-        it('Então eu deveria ver na descrição "-"', () => {
-            extratoLocators.descricaoExtrato().invoke('text')
-                .then((text) => {
-                    if (text.trim() === '') {
-                        extratoLocators.descricaoExtrato().should('have.text', '-');
-                    } else {
-                        extratoLocators.descricaoExtrato().should('not.have.text', '-');
-                    }
-                });
-        })
+    //-----------------CENÁRIO 4----------------------
+    it('Transações sem comentário devem exibir (-)', () => {
+        extratoLocators.descricaoExtrato().invoke('text')
+            .then((text) => {
+                if (text.trim() === '') {
+                    extratoLocators.descricaoExtrato().should('have.text', '-');
+                } else {
+                    extratoLocators.descricaoExtrato().should('not.have.text', '-');
+                }
+            });
     })
 })

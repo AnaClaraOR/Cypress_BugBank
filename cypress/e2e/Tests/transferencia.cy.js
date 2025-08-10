@@ -5,8 +5,11 @@ const { env } = require('../../support/env-dinamico')
 describe('Transação', () => {
 
   beforeEach('Dado que me registrei e estou logado', () => {
-    cy.fluxoCadastro(env.usuario1);
-    cy.fluxoCadastro(env.usuario2);
+    cy.fluxoCadastro(env.usuario1)
+    cy.fluxoCadastro(env.usuario2).then((dadosDaConta) => {
+      Cypress.env('numeroConta', dadosDaConta.numeroConta);
+      Cypress.env('digitoConta', dadosDaConta.digitoConta);
+    })
     cy.fluxoLogin(env.usuario1);
     transferenciaLocators.transferenciaBnt().click()
   })
@@ -17,8 +20,8 @@ describe('Transação', () => {
       this.currentTest.title === 'Ao realizar uma transferência com sucesso deve ser redirecionado para o extrato'
     ) {
       transferenciaLocators.sairBnt().click()
-      return; 
-    } 
+      return;
+    }
     cadastroLocators.fecharBnt().click()
     transferenciaLocators.sairBnt().click()
   });
@@ -112,6 +115,7 @@ describe('Transação', () => {
     cy.get(transferenciaLocators.valorTransferenciaField).type(env.valorTransferencia)
     cy.get(transferenciaLocators.descricaoField).type(env.descricao)
     transferenciaLocators.transferirBnt().click()
+    cadastroLocators.alert().should('contains.text', 'Transferencia realizada com sucesso')
     cadastroLocators.fecharBnt().click()
     transferenciaLocators.voltarBnt().click()
 
@@ -127,7 +131,7 @@ describe('Transação', () => {
   })
 
   //-----------------CENÁRIO 8----------------------
-  it('Ao realizar uma transferência com sucesso deve ser redirecionado para o extrato', () => {
+  it.only('Ao realizar uma transferência com sucesso deve ser redirecionado para o extrato', () => {
     const numeroConta = Cypress.env('numeroConta');
     const digitoConta = Cypress.env('digitoConta');
 

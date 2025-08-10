@@ -7,7 +7,10 @@ describe('Extrato', () => {
 
     beforeEach('Dado que me registrei e estou logado', () => {
         cy.fluxoCadastro(env.usuario1);
-        cy.fluxoCadastro(env.usuario2);
+        cy.fluxoCadastro(env.usuario2).then((dadosDaConta) => {
+            Cypress.env('numeroConta', dadosDaConta.numeroConta);
+            Cypress.env('digitoConta', dadosDaConta.digitoConta);
+        })
         cy.fluxoLogin(env.usuario1);
         cy.fluxoTransferencia();
         cadastroLocators.fecharBnt().click()

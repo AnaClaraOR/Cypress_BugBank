@@ -37,10 +37,10 @@ Cypress.Commands.add('numeroDaConta', () => {
             const match = text.match(/(\d+)-(\d+)/);
             const [_, numeroConta, digitoConta] = match;
 
-            Cypress.env('numeroConta', numeroConta);
-            cy.log(`numeroConta: ${numeroConta}`);
-            Cypress.env('digitoConta', digitoConta);
-            cy.log(`digitoConta: ${digitoConta}`);
+            return {
+                numeroConta,
+                digitoConta
+            }
         });
 });
 
@@ -78,8 +78,11 @@ Cypress.Commands.add('fluxoCadastro', (usuario) => {
     cy.get(cadastroLocators.confirmaSenhaInput).type(usuario.senha, { force: true })
     cadastroLocators.contaSaldoBnt().click({ force: true })
     cadastroLocators.cadastrarBnt().click({ force: true })
-    cy.numeroDaConta();
+    cy.numeroDaConta().then((dadosDaConta) => {
+        cy.wrap(dadosDaConta).as('dadosDaConta');
+    })
     cadastroLocators.fecharBnt().click()
+    cy.get('@dadosDaConta')
 })
 
 Cypress.Commands.add('fluxoLogin', (usuario) => {

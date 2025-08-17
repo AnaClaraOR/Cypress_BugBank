@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { cadastroLocators } from '../../support/locators/cadastroLocators';
 import { transferenciaLocators } from "../../support/locators/transferenciaLocators"
 const { env } = require('../../support/env-dinamico')
@@ -40,17 +41,46 @@ describe('Transação', () => {
   })
 
   //-----------------CENÁRIO 2----------------------
-  it('Só é permitido transferência quando saldo é igual ou maior que valor para transferir', () => {
+  it('Permitido transferência quando saldo é igual ou maior que valor para transferir', () => {
     const numeroConta = Cypress.env('numeroConta');
     const digitoConta = Cypress.env('digitoConta');
 
-    cy.get(transferenciaLocators.numeroContaField).type(numeroConta)
-    cy.get(transferenciaLocators.digitoContaField).type(digitoConta)
-    cy.get(transferenciaLocators.valorTransferenciaField).type(env.valorMaior)
-    cy.get(transferenciaLocators.descricaoField).type(env.descricao)
-    transferenciaLocators.transferirBnt().click()
-    cadastroLocators.alert().should('contains.text', 'Você não tem saldo suficiente para essa transação')
-  })
+    cy.saldo().then((saldo) => {
+      cy.log('Saldo:', saldo)
+      const valorTransferencia = faker.finance.amount({ min: 1, max: saldo, dec: 2 })
+      cy.get(transferenciaLocators.numeroContaField).type(numeroConta);
+      cy.get(transferenciaLocators.digitoContaField).type(digitoConta);
+      cy.get(transferenciaLocators.valorTransferenciaField).type(valorTransferencia);
+      cy.log('valor:', valorTransferencia)
+      cy.get(transferenciaLocators.descricaoField).type(env.descricao);
+      transferenciaLocators.transferirBnt().click();
+
+      cadastroLocators.alert()
+        .should('be.visible')
+        .and('contains.text', 'Transferencia realizada com sucesso');
+    });
+  });
+
+  //-----------------CENÁRIO 2.1----------------------
+  it('Não é permitido transferência quando saldo é menor que valor para transferir', () => {
+    const numeroConta = Cypress.env('numeroConta');
+    const digitoConta = Cypress.env('digitoConta');
+
+    cy.saldo().then((saldo) => {
+      cy.log('Saldo:', saldo)
+      const valorTransferencia = faker.finance.amount({ min: saldo + 1, max: saldo*5, dec: 2 })
+      cy.get(transferenciaLocators.numeroContaField).type(numeroConta);
+      cy.get(transferenciaLocators.digitoContaField).type(digitoConta);
+      cy.get(transferenciaLocators.valorTransferenciaField).type(valorTransferencia);
+      cy.log('valor:', valorTransferencia)
+      cy.get(transferenciaLocators.descricaoField).type(env.descricao);
+      transferenciaLocators.transferirBnt().click();
+
+      cadastroLocators.alert()
+        .should('be.visible')
+        .and('contains.text', 'Você não tem saldo suficiente para essa transação');
+    });
+  });
 
   //-----------------CENÁRIO 3----------------------
   it('Tentativa de transferência para conta inválida deve exibir mensagem de erro "Conta inválida ou inexistente"', () => {
@@ -131,7 +161,7 @@ describe('Transação', () => {
   })
 
   //-----------------CENÁRIO 8----------------------
-  it.only('Ao realizar uma transferência com sucesso deve ser redirecionado para o extrato', () => {
+  it('Ao realizar uma transferência com sucesso deve ser redirecionado para o extrato', () => {
     const numeroConta = Cypress.env('numeroConta');
     const digitoConta = Cypress.env('digitoConta');
 

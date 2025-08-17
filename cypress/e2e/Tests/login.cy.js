@@ -27,8 +27,8 @@ describe('Login', () => {
 
   //----------------CENÁRIO 3-------------------
   it('Não deve autorizar o acesso para usuários inválidos ou não cadastrados', () => {
-    cy.get(loginLocators.emailInput).type(env.usuario1.email, { force: true })
-    cy.get(loginLocators.senhaInput).type(env.usuario1.senha, { force: true })
+    cy.get(loginLocators.emailInput).type(env.usuario.email, { force: true })
+    cy.get(loginLocators.senhaInput).type(env.usuario.senha, { force: true })
     loginLocators.acessarBnt().click()
     loginLocators.alertUserInvalido().should('contains.text', 'Usuário ou senha inválido.\nTente novamente ou verifique suas informações!')
   })

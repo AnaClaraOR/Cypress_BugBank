@@ -2,12 +2,11 @@ const { faker } = require('@faker-js/faker')
 
 module.exports = {
   env: {
-    valorTransferencia: faker.finance.amount({ min: 1, max: 200, dec: 2 }),
+    valorTransferencia: faker.finance.amount({ min: 1, max: 1500, dec: 2 }),
     descricao: faker.word.words(),
     numConta: faker.finance.accountNumber(),
     numDigitoConta: faker.finance.accountNumber(1),
-    valorMenor: faker.finance.amount({ min: 0, max: 3, dec: 2, symbol: '-' }),
-    valorMaior: faker.finance.amount({ min: 1000, max: 2000, dec: 2 }),
+    valorMenor: faker.finance.amount({ min: -100, max: 0, dec: 2 }),
     numContaInvalida: faker.string.alphanumeric(5),
     numDigitoContaInvalida: faker.string.alphanumeric(2),
 

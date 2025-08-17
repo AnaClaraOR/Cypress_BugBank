@@ -68,6 +68,21 @@ Cypress.Commands.add('fluxoTransferencia', () => {
     transferenciaLocators.transferirBnt().click();
 })
 
+Cypress.Commands.add('fluxoTransferencia2', (dadosDaTranferencia) => {
+    transferenciaLocators.transferenciaBnt().click();
+
+    console.log('numeroConta3:',dadosDaTranferencia.numeroConta)
+    cy.get(transferenciaLocators.numeroContaField).type(dadosDaTranferencia.numeroConta);
+    cy.get(transferenciaLocators.digitoContaField).type(dadosDaTranferencia.digitoConta);
+    cy.get(transferenciaLocators.valorTransferenciaField).type(dadosDaTranferencia.valorTransferencia);
+
+    if (dadosDaTranferencia.descricao) {
+        cy.get(transferenciaLocators.descricaoField).type(dadosDaTranferencia.descricao)
+    };
+
+    transferenciaLocators.transferirBnt().click();
+})
+
 //Comando customizavel para a execução do cadastro
 Cypress.Commands.add('fluxoCadastro', (usuario) => {
     cy.visit('/')
@@ -85,6 +100,7 @@ Cypress.Commands.add('fluxoCadastro', (usuario) => {
     cy.get('@dadosDaConta')
 })
 
+//Comando customizavel para o login
 Cypress.Commands.add('fluxoLogin', (usuario) => {
     cy.visit('/')
     cy.get(loginLocators.emailInput).type(usuario.email, { force: true })
